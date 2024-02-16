@@ -619,6 +619,10 @@ struct MarkupParser {
             cmarkOptions |= CMARK_OPT_SOURCEPOS
         }
         
+        if options.contains(.preserveWhitespace) {
+            cmarkOptions |= ((1 << 19) | CMARK_OPT_INLINE_ONLY)
+        }
+        
         let parser = cmark_parser_new(cmarkOptions)
         
         cmark_parser_attach_syntax_extension(parser, cmark_find_syntax_extension("table"))
